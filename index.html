@@ -6,7 +6,99 @@
     <title>Feedback User Interface</title>
 
     <!-- css -->
-     <link rel="stylesheet" href="style.css">
+     <style>
+        body{
+            min-height: 100vh;
+            background-color: #735AB8;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .feedback-card{
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(208, 231, 253);
+            width:420px;
+            min-height: 250px;
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+        }
+        .ratings{
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rating{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .rating:hover{
+            cursor:pointer;
+            border-color: rgb(118, 118, 199);
+            background-color: #654daa;
+            color:wheat;
+            font-weight: bold;
+        }
+        .rating i{
+            font-size: 46px;
+        }
+
+        .rating span{
+            font-size: 16px;
+        }
+        #Unhappy i{
+            color: #ee4848;
+        }
+
+        #Neutral i{
+            color: #ffff3d;
+        }
+
+        #Satisfied i{
+            color: #52d552;
+        }
+        #reviewBtn{
+            margin-top:12px ;
+            background-color: #ccb9ff;
+            color: white;
+            border:none;
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+        #reviewBtn:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+            background-color: #654daa;
+            color:wheat;
+            cursor: pointer;
+        }
+        .clicked{
+            font-weight: bold;
+            background-color: #654daa;
+            color:wheat;
+            border-color: rgb(118, 118, 199);
+        }
+        .txt{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 85px;
+        }
+        #thanks{
+            color:#4444c7;
+        }
+
+     </style>
 
      <!-- fontawsome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
@@ -15,25 +107,64 @@
     <section class="feedback-card">
         <h2>How was you experience?</h2>
         <div class="ratings">
-
-        <div class="rating" id="unhappy">
-            <i class="fa-solid fa-face-frown"></i>
-            <span id="label">Unhappy</span>
+            <div class="rating" id="Unhappy">
+                <i class="fa-solid fa-face-frown"></i>
+                <span id="label">Unhappy</span>
+            </div>
+            <div class="rating" id="Neutral">
+                <i class="fa-solid fa-face-meh"></i>
+                <span id="label">Neutral</span>
+            </div>
+            <div class="rating" id="Satisfied">
+                <i class="fa-solid fa-face-smile"></i>
+                <span id="label">Satisfied</span>
+            </div>
         </div>
-
-        <div class="rating" id="neutral">
-            <i class="fa-solid fa-face-meh"></i>
-            <span id="label">Neutral</span>
-        </div>
-
-        <div class="rating" id="satisfied">
-            <i class="fa-solid fa-face-smile"></i>
-            <span id="label">Satisfied</span>
-        </div>
-    </div>
         <button id="reviewBtn">Send Review</button>
-        
     </section>
-    <script src="script.js"></script>
+    <script>
+        const ratings = document.querySelectorAll(".rating");
+        let selectedRating;
+
+        ratings.forEach(function(rating){
+            rating.addEventListener("click", function(){
+                // remove clicked from every rating
+                ratings.forEach(function(i){
+                    i.classList.remove("clicked");
+                });
+                // add clicked to the rating that was just clicked
+                rating.classList.add("clicked");
+                selectedRating = rating.id;
+            });
+        });
+        console.log(selectedRating);
+
+        //check if there is a clicked rating to approve sending review
+        function isClicked(){
+            let clicked = false
+            ratings.forEach(function(rating){
+                if(rating.classList.contains("clicked")){
+                    clicked = true;
+                }
+            })
+            return clicked;
+        }
+
+        const reviewBtn = document.getElementById("reviewBtn");
+        reviewBtn.addEventListener("click",function(){
+            if(!(isClicked())){
+                alert("Please select a rating!");
+            }else{
+                document.querySelector(".feedback-card").innerHTML = `
+                    <div class="txt">
+                        <h2 id="thanks">Thank you!</h2>
+                        <p>Feedback: <span id="selected"><strong><i>${selectedRating}</i></strong></span></p>
+                        <p>we apperciate you taking the time to help us improve.</p>
+                    </div>
+                </div>
+                `;
+            }
+        })
+    </script>
 </body>
 </html>
