@@ -1,0 +1,80 @@
+body{
+    min-height: 100vh;
+    background-color: #735AB8;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.feedback-card{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(208, 231, 253);
+    width:420px;
+    min-height: 250px;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+}
+.ratings{
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    justify-content: center;
+}
+
+.rating{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 10px;
+}
+.rating:hover{
+    cursor:pointer;
+    border-color: rgb(118, 118, 199);
+    background-color: #654daa;
+    color:wheat;
+    font-weight: bold;
+}
+.rating i{
+    font-size: 46px;
+}
+
+.rating span{
+    font-size: 16px;
+}
+#unhappy i{
+    color: #ee4848;
+}
+
+#neutral i{
+    color: #ffff3d;
+}
+
+#satisfied i{
+    color: #52d552;
+}
+#reviewBtn{
+    margin-top:12px ;
+    background-color: #ccb9ff;
+    color: white;
+    border:none;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+#reviewBtn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+    background-color: #654daa;
+    color:wheat;
+    cursor: pointer;
+}
+.clicked{
+    font-weight: bold;
+    background-color: #654daa;
+    color:wheat;
+    border-color: rgb(118, 118, 199);
+}
